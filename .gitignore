@@ -1,0 +1,50 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+.pnpm-debug.log*
+
+# Diretórios de ambiente
+.env
+.env.*.local
+
+# Logs
+logs/
+*.log
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Cobertura de testes
+coverage/
+*.lcov
+
+# Sistema operacional e arquivos de IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Build e diretórios temporários
+dist/
+build/
+tmp/
+temp/
+
+# Arquivos de erros do sistema
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Typescript
+*.tsbuildinfo
+
+# Docker
+docker-compose.override.yml
