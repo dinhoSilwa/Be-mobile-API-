@@ -30,7 +30,7 @@ export class CollaboratorController {
   ): Promise<void> {
     try {
       const getAll = await CollaboratorServices.getAllColaboratorList();
-      res.status(200).json({ getAll });
+      res.status(200).json(getAll);
     } catch (error) {
       res.status(404).json({ error: "Error To get All Collaborator" });
     }
