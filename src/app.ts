@@ -13,5 +13,5 @@ app.use(
 );
 
 app.use(express.json());
-app.use("/api/collaborators", router);
+app.use("/api/collaborators/", router);
 export default app;

@@ -9,7 +9,9 @@ export class CollaboratorController {
       );
       res.status(201).json(collaborator);
     } catch (error) {
-      res.status(500).json({ error: "Error creating Collaborator" });
+      res
+        .status(500)
+        .json({ error: "Error creating Collaborator", msg: error });
     }
   }
 
@@ -20,7 +22,9 @@ export class CollaboratorController {
       );
       res.status(200).json({ collaborator });
     } catch (error) {
-      res.status(500).json({ error: "Error Fetching Collaborator" });
+      res
+        .status(500)
+        .json({ error: "Error Fetching Collaborator", msg: error });
     }
   }
 
@@ -32,7 +36,9 @@ export class CollaboratorController {
       const getAll = await CollaboratorServices.getAllColaboratorList();
       res.status(200).json(getAll);
     } catch (error) {
-      res.status(404).json({ error: "Error To get All Collaborator" });
+      res
+        .status(404)
+        .json({ error: "Error To get All Collaborator", msg: error });
     }
   }
 
@@ -48,7 +54,9 @@ export class CollaboratorController {
       }
       res.status(200).json(updateCollaborator);
     } catch (error) {
-      res.status(500).json({ error: "Error Updating Collaborator" });
+      res
+        .status(500)
+        .json({ error: "Error Updating Collaborator", msg: error });
     }
   }
 
