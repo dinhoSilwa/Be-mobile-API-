@@ -1,6 +1,7 @@
 import express, { Application } from "express";
 import cors from "cors";
 import { router } from "./Routes/Collaborator/collaborator.router";
+import { routerAuth } from "./Routes/auth/authRouter";
 
 const app: Application = express();
 
@@ -14,4 +15,5 @@ app.use(
 
 app.use(express.json());
 app.use("/api/collaborators/", router);
+app.use('/api/auth', routerAuth)
 export default app;
