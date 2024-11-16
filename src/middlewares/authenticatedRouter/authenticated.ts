@@ -1,5 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import { TokenManager } from "../jwtToken/tokenGenerate";
+import type { userToken } from "../../types/types";
 
 export const authenticateToken = (
   req: Request,
@@ -13,7 +14,7 @@ export const authenticateToken = (
     }
     const token = authHeader.split(" ")[1];
     const tokenManager = TokenManager.getInstance();
-    const decodedToken = tokenManager.verifyToken(token);
+    const decodedToken = tokenManager.verifyToken(token) as userToken;
     if (!decodedToken) {
       return res.status(403).json({ error: "Token inválido ou expirado" });
     }

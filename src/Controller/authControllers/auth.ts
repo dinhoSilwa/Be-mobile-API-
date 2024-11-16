@@ -14,7 +14,7 @@ export class AuthController {
   static async credentials(req: Request, res: Response): Promise<any> {
     try {
       const getCredentials = await AuthService.credentials(req.body);
-      res.status(200).json({ getCredentials });
+      res.status(200).json(getCredentials);
     } catch (error) {
       res.status(500).json({ msgErro: error });
     }

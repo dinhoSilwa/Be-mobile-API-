@@ -1,14 +1,14 @@
 import jwt from "jsonwebtoken";
 import type { JwtPayload } from "jsonwebtoken";
 import { configDotenv } from "dotenv";
-configDotenv()
+configDotenv();
 
 export class TokenManager {
   private static instance: TokenManager;
   private secretKey: string;
 
   private constructor() {
-    this.secretKey = process.env.JWT_SECRET_KEY || ""; 
+    this.secretKey = process.env.JWT_SECRET_KEY || "";
     if (!this.secretKey) {
       throw new Error("JWT_SECRET_KEY não definido no ambiente.");
     }
@@ -45,9 +45,13 @@ export class TokenManager {
       if (!token) {
         throw new Error("Token não fornecido.");
       }
+
       return jwt.verify(token, this.secretKey) as JwtPayload;
     } catch (error) {
-      console.error("Erro ao validar token:", error);
+      if (error instanceof jwt.TokenExpiredError) {
+        throw new Error("Falha na altenticação");
+      }
+
       return null;
     }
   }

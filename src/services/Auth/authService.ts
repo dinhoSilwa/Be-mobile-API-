@@ -1,3 +1,4 @@
+import { TokenManager } from "../../middlewares/jwtToken/tokenGenerate";
 import { AuthModel, type AuthUserProps } from "../../Models/Auth/authModel";
 import { Encryption } from "../../utils/encryption/encryptionPassword";
 
@@ -23,6 +24,8 @@ export class AuthService {
     }
     const isMatch = await Encryption.compare(password, findEmail?.password);
     if (!isMatch) return { msg: "Senha incorreta" };
-    return { name: findEmail.name, email: findEmail.email };
+    const newAuth = { name: findEmail.name, email: findEmail.email };
+
+    return TokenManager.getInstance().generateToken(newAuth);
   }
 }
