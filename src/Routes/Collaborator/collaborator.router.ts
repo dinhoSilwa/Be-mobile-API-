@@ -1,10 +1,10 @@
 import { Router } from "express";
 import { CollaboratorController } from "../../Controller/Collaborator/colaboratorController";
 
-export const router = Router();
+export const routerCollaborator = Router();
 
-router.get("/", CollaboratorController.getallCollaboratorList);
-router.post("/", CollaboratorController.createCollaborator);
-router.get("/:id", CollaboratorController.getCollaborator);
-router.put("/:id", CollaboratorController.updateCollaborator);
-router.delete("/:id", CollaboratorController.deleteCollaborator);
+routerCollaborator.get("/", CollaboratorController.getallCollaboratorList);
+routerCollaborator.post("/", CollaboratorController.createCollaborator);
+routerCollaborator.get("/:id", CollaboratorController.getCollaborator);
+routerCollaborator.put("/:id", CollaboratorController.updateCollaborator);
+routerCollaborator.delete("/:id", CollaboratorController.deleteCollaborator);
