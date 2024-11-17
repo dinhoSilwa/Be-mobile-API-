@@ -3,8 +3,8 @@ import { CollaboratorController } from "../../Controller/Collaborator/colaborato
 
 export const routerCollaborator = Router();
 
-routerCollaborator.get("/", CollaboratorController.getallCollaboratorList);
-routerCollaborator.post("/", CollaboratorController.createCollaborator);
-routerCollaborator.get("/:id", CollaboratorController.getCollaborator);
-routerCollaborator.put("/:id", CollaboratorController.updateCollaborator);
-routerCollaborator.delete("/:id", CollaboratorController.deleteCollaborator);
+routerCollaborator.get("/:role_id", CollaboratorController.getAll);
+routerCollaborator.post("/", CollaboratorController.create);
+//routerCollaborator.get("/:id", CollaboratorController.getCollaborator);
+routerCollaborator.put("/:id", CollaboratorController.update);
+routerCollaborator.delete("/:id", CollaboratorController.delete);

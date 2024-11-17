@@ -5,7 +5,12 @@ export class CollaboratorServices {
   static async createCollaborator(
     Collaborator: IColalaborator
   ): Promise<IColalaborator> {
-    const collaborator = new CollaboratorModel(Collaborator);
+    const { role_id } = Collaborator;
+
+    const collaborator = new CollaboratorModel({
+      ...Collaborator,
+      role_id,
+    });
     return await collaborator.save();
   }
 
@@ -13,8 +18,10 @@ export class CollaboratorServices {
     return await CollaboratorModel.findById(id);
   }
 
-  static async getAllColaboratorList(): Promise<IColalaborator[]> {
-    return await CollaboratorModel.find();
+  static async getAllColaboratorList(
+    role_id: string
+  ): Promise<IColalaborator[]> {
+    return await CollaboratorModel.find({ role_id });
   }
 
   static async UpdateCollaborator(
