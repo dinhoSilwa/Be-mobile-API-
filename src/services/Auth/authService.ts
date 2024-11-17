@@ -23,9 +23,16 @@ export class AuthService {
       return { msg: "Falha ao Obter Email" };
     }
     const isMatch = await Encryption.compare(password, findEmail?.password);
-    if (!isMatch) return { msg: "Senha incorreta" };
-    const newAuth = { name: findEmail.name, email: findEmail.email };
 
-    return TokenManager.getInstance().generateToken(newAuth);
+    if (!isMatch) return { msg: "Senha incorreta" };
+
+    const newAuth = {
+      name: findEmail.name,
+      email: findEmail.email,
+      id: findEmail.id,
+    };
+
+    const token = TokenManager.getInstance().generateToken(newAuth);
+    return { token };
   }
 }

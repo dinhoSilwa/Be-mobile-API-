@@ -5,18 +5,23 @@ export class AuthController {
   static async createAuth(req: Request, res: Response): Promise<any> {
     try {
       const createAuth = await AuthService.create(req.body);
-      res.status(201).json({ createAuth });
+      const { name, email } = createAuth as any;
+      return res.status(201).json({ name, email });
     } catch (error) {
-      res.status(404).json({ msgErro: error });
+      return res.status(404).json({ msgErro: error });
     }
   }
 
   static async credentials(req: Request, res: Response): Promise<any> {
     try {
       const getCredentials = await AuthService.credentials(req.body);
-      res.status(200).json(getCredentials);
+      return res.status(200).json(getCredentials);
+
     } catch (error) {
-      res.status(500).json({ msgErro: error });
+      if(error instanceof Error){
+        return res.status(500).json(`Falha ao Altenticar usuário, ${error.message}`)
+      }
+      return res.status(500).json({ msgErro: error });
     }
   }
 }

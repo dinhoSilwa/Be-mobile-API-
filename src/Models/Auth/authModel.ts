@@ -17,4 +17,8 @@ export const AuthUser = new Schema(
   }
 );
 
-export const AuthModel = model<AuthUserProps>("authenticated-users", AuthUser);
+export const AuthModel = model<AuthUserProps>(
+  "authUsers",
+  AuthUser,
+  "authenticated-users"
+);

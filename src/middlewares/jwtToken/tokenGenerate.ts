@@ -34,6 +34,7 @@ export class TokenManager {
         throw new Error("Token não fornecido.");
       }
       return jwt.decode(token) as JwtPayload;
+      
     } catch (error) {
       console.error("Erro ao decodificar token:", error);
       return null;
