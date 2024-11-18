@@ -7,11 +7,29 @@ export class CollaboratorController {
       const collaborator = await CollaboratorServices.createCollaborator(
         req.body
       );
-      res.status(201).json({ sucess: "Usuário cadastrado com Sucesso" });
+
+      res.status(201).json({ collaborator });
     } catch (error) {
       res
         .status(500)
         .json({ error: "Error creating Collaborator", msg: error });
+    }
+  }
+
+  static async getAll(req: Request, res: Response): Promise<void> {
+    try {
+      const { role_id } = req.params;
+      if (!role_id) {
+       res.status(500).json({ msg: "Falha ao Obter Id" });
+      }
+
+      const allCollaboratorsByRoleId =
+        await CollaboratorServices.getAllColaboratorList(role_id);
+      res.status(200).json(allCollaboratorsByRoleId);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ error: "Error To get All Collaborator", msg: error });
     }
   }
 
@@ -25,18 +43,6 @@ export class CollaboratorController {
       res
         .status(500)
         .json({ error: "Error Fetching Collaborator", msg: error });
-    }
-  }
-
-  static async getAll(req: Request, res: Response): Promise<void> {
-    try {
-      const allCollaboratorsByRoleId =
-        await CollaboratorServices.getAllColaboratorList(req.params.role_id);
-      res.status(200).json(allCollaboratorsByRoleId);
-    } catch (error) {
-      res
-        .status(500)
-        .json({ error: "Error To get All Collaborator", msg: error });
     }
   }
 
