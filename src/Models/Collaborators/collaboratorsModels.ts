@@ -1,8 +1,8 @@
 import { model, Schema } from "mongoose";
-import type { IColalaborator } from "../../types/collaborators/collaboratorsTypes";
+import type { CollaboratorProps } from "../../types/collaborators/collaboratorsTypes";
 
 export const CollaboratorSchema = new Schema({
-  // avatar: { type: String, required: true },
+  _id: { type: String, required: true },
   name: { type: String, required: true },
   position: { type: String, required: true },
   admission: { type: String, required: true },
@@ -14,7 +14,7 @@ export const CollaboratorSchema = new Schema({
   },
 });
 
-export const CollaboratorModel = model<IColalaborator>(
+export const CollaboratorModel = model<CollaboratorProps>(
   "Collaborator",
   CollaboratorSchema
 );
