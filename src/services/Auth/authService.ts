@@ -1,5 +1,5 @@
 import { TokenManager } from "../../middlewares/jwtToken/tokenGenerate";
-import { AuthModel, type AuthUserProps } from "../../Models/Auth/authModel";
+import { AuthModel, type AuthUserProps } from "../../models/Auth/authModel"
 import { Encryption } from "../../utils/encryption/encryptionPassword";
 
 //Encryption é uma class Externa
