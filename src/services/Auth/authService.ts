@@ -1,5 +1,5 @@
 import { TokenManager } from "../../middlewares/jwtToken/tokenGenerate";
-import { AuthModel, type AuthUserProps } from "../../models/Auth/authModel"
+import { AuthModel, type AuthUserProps } from "../../models/Auth/authModel";
 import { Encryption } from "../../utils/encryption/encryptionPassword";
 
 //Encryption é uma class Externa
@@ -18,13 +18,11 @@ export class AuthService {
     useCredentials: Pick<AuthUserProps, "email" | "password">
   ): Promise<any> {
     const { email, password } = useCredentials;
-    const findEmail = await AuthModel.findOne({ email });
-    if (!findEmail) {
-      return { msg: "Falha ao Obter Email" };
-    }
-    const isMatch = await Encryption.compare(password, findEmail?.password);
 
-    if (!isMatch) return { msg: "Senha incorreta" };
+    const findEmail = await AuthModel.findOne({ email });
+    if (!findEmail) throw new Error("O email fornecido não foi encontrado.");
+    const isMatch = await Encryption.compare(password, findEmail?.password);
+    if (!isMatch) throw new Error("A senha fornecida está incorreta.");
 
     const newAuth = {
       name: findEmail.name,
@@ -33,6 +31,11 @@ export class AuthService {
     };
 
     const token = TokenManager.getInstance().generateToken(newAuth);
-    return { token };
+    return {
+      name: "LOGIN_SUCCESS",
+      message: "Login realizado com sucesso.",
+      statusCode: 200,
+      token: token,
+    };
   }
 }
