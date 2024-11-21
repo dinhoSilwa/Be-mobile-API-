@@ -1,4 +1,4 @@
-import { ErrorResponse } from "../../erros/UnexpectedError";
+import { ErrorResponse } from "../errors/UnexpectedError";
 import { AuthService } from "../../services/Auth/authService";
 import { Response, Request } from "express";
 
