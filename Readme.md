@@ -1,201 +1,317 @@
-# **Documentação da API: Colaboradores**
+# API Documentation
 
-## **Base URL**
+## Auth Routes
 
-A URL base para as rotas é: `/api/collaborators/`
+### 1. **POST /create-credentials**
+
+Cria um novo usuário para autenticação.
+
+#### Request Body:
+
+```json
+{
+  "name": "string", // Nome do usuário
+  "email": "string", // Email do usuário
+  "password": "string" // Senha do usuário
+}
+```
+
+#### Response (Sucesso):
+
+- Status: `201 Created`
+
+```json
+{
+  "name": "USER_CREATED",
+  "message": "usuário criado com sucesso",
+  "statusCode": 201
+}
+```
+
+#### Response (Erro):
+
+- Status: `500 Internal Server Error`
+
+```json
+{
+  "name": "Error Name",
+  "message": "Error Message",
+  "statusCode": 500
+}
+```
 
 ---
 
-### **1. Criar um Colaborador**
+### 2. **POST /login**
 
-- **URL:** `/api/collaborators/`
-- **Método:** `POST`
-- **Descrição:** Cria um novo colaborador.
-- **Corpo da Requisição (JSON):**
+Realiza o login do usuário, retornando um token JWT.
+
+#### Request Body:
 
 ```json
 {
-  "name": "John Doe",
-  "position": "Software Engineer",
-  "admission": "2023-05-15",
-  "phone": "+1234567890"
+  "email": "string", // Email do usuário
+  "password": "string" // Senha do usuário
 }
 ```
 
-- **Resposta de Sucesso (Status 201):**
+#### Response (Sucesso):
+
+- Status: `200 OK`
 
 ```json
 {
-  "name": "John Doe",
-  "position": "Software Engineer",
-  "admission": "2023-05-15",
-  "phone": "+1234567890"
+  "name": "LOGIN_SUCCESS",
+  "message": "Login realizado com sucesso.",
+  "statusCode": 200,
+  "token": "string" // Token JWT gerado
 }
 ```
 
-- **Resposta de Erro (Status 500):**
+#### Response (Erro):
+
+- Status: `404 Not Found`
 
 ```json
 {
-  "error": "Error creating Collaborator",
-  "msg": "Detalhes do erro"
+  "name": "Error Name",
+  "message": "Error Message",
+  "statusCode": 404
 }
 ```
 
 ---
 
-### **2. Obter um Colaborador**
+## Collaborator Routes
 
-- **URL:** `/api/collaborators/:id`
-- **Método:** `GET`
-- **Descrição:** Recupera um colaborador pelo ID.
-- **Parâmetros de URL:**
+### 1. **GET /list/:role_id**
 
-  - `id`: ID do colaborador (obrigatório).
+Lista todos os colaboradores de um determinado cargo.
 
-- **Resposta de Sucesso (Status 200):**
+#### Request Parameters:
+
+- `role_id`: ID do cargo.
+
+#### Response (Sucesso):
+
+- Status: `200 OK`
 
 ```json
 {
-  "collaborator": {
-    "name": "John Doe",
-    "position": "Software Engineer",
-    "admission": "2023-05-15",
-    "phone": "+1234567890"
+  "name": "COLLABORATOR_OBTAINED",
+  "message": "Colaboradores obtidos com sucesso.",
+  "statusCode": 200,
+  "data": [
+    // Lista de colaboradores
+    {
+      "_id": "string",
+      "name": "string",
+      "position": "string",
+      "admission": "string",
+      "phone": "string",
+      "role_id": "string"
+    }
+    // outros colaboradores...
+  ]
+}
+```
+
+#### Response (Erro):
+
+- Status: `404 Not Found`
+
+```json
+{
+  "name": "Error Name",
+  "message": "Error Message",
+  "statusCode": 404
+}
+```
+
+---
+
+### 2. **GET /:role_id/:id**
+
+Obtém os detalhes de um colaborador específico pelo ID.
+
+#### Request Parameters:
+
+- `role_id`: ID do cargo.
+- `id`: ID do colaborador.
+
+#### Response (Sucesso):
+
+- Status: `200 OK`
+
+```json
+{
+  "name": "COLLABORATOR_OBTAINED",
+  "message": "Colaborador obtido com sucesso por ID.",
+  "statusCode": 200,
+  "data": {
+    "_id": "string",
+    "name": "string",
+    "position": "string",
+    "admission": "string",
+    "phone": "string",
+    "role_id": "string"
   }
 }
 ```
 
-- **Resposta de Erro (Status 500):**
+#### Response (Erro):
+
+- Status: `500 Internal Server Error`
 
 ```json
 {
-  "error": "Error Fetching Collaborator",
-  "msg": "Detalhes do erro"
+  "name": "Error Name",
+  "message": "Error Message",
+  "statusCode": 500
 }
 ```
 
 ---
 
-### **3. Obter Todos os Colaboradores**
+### 3. **POST /create**
 
-- **URL:** `/api/collaborators/`
-- **Método:** `GET`
-- **Descrição:** Recupera todos os colaboradores cadastrados.
-- **Resposta de Sucesso (Status 200):**
+Cria um novo colaborador.
+
+#### Request Body:
 
 ```json
-[
-  {
-    "name": "John Doe",
-    "position": "Software Engineer",
-    "admission": "2023-05-15",
-    "phone": "+1234567890"
-  },
-  {
-    "name": "Jane Doe",
-    "position": "Product Manager",
-    "admission": "2022-03-12",
-    "phone": "+0987654321"
+{
+  "name": "string", // Nome do colaborador
+  "position": "string", // Cargo do colaborador
+  "admission": "string", // Data de admissão
+  "phone": "string", // Telefone do colaborador
+  "role_id": "string" // ID do cargo (ref para "authenticated-users")
+}
+```
+
+#### Response (Sucesso):
+
+- Status: `201 Created`
+
+```json
+{
+  "name": "COLLABORATOR_CREATED",
+  "message": "Colaborador criado com Sucesso.",
+  "statusCode": 201,
+  "data": {
+    "_id": "string",
+    "name": "string",
+    "position": "string",
+    "admission": "string",
+    "phone": "string",
+    "role_id": "string"
   }
-]
+}
 ```
 
-- **Resposta de Erro (Status 404):**
+#### Response (Erro):
+
+- Status: `401 Unauthorized`
 
 ```json
 {
-  "error": "Error To get All Collaborator",
-  "msg": "Detalhes do erro"
+  "name": "Error Name",
+  "message": "Error Message",
+  "statusCode": 401
 }
 ```
 
 ---
 
-### **4. Atualizar um Colaborador**
+### 4. **PUT /:id**
 
-- **URL:** `/api/collaborators/:id`
-- **Método:** `PUT`
-- **Descrição:** Atualiza as informações de um colaborador pelo ID.
-- **Parâmetros de URL:**
-  - `id`: ID do colaborador (obrigatório).
-- **Corpo da Requisição (JSON):**
+Atualiza os dados de um colaborador existente.
+
+#### Request Parameters:
+
+- `id`: ID do colaborador.
+
+#### Request Body:
 
 ```json
 {
-  "name": "John Doe Updated",
-  "position": "Senior Software Engineer",
-  "admission": "2023-05-15",
-  "phone": "+1234567890"
+  "name": "string", // Nome do colaborador
+  "position": "string", // Cargo do colaborador
+  "admission": "string", // Data de admissão
+  "phone": "string" // Telefone do colaborador
 }
 ```
 
-- **Resposta de Sucesso (Status 200):**
+#### Response (Sucesso):
+
+- Status: `200 OK`
 
 ```json
 {
-  "name": "John Doe Updated",
-  "position": "Senior Software Engineer",
-  "admission": "2023-05-15",
-  "phone": "+1234567890"
+  "name": "UPDATED_COLLABORATOR",
+  "message": "Colaborador atualizado com sucesso.",
+  "statusCode": 200,
+  "data": {
+    "_id": "string",
+    "name": "string",
+    "position": "string",
+    "admission": "string",
+    "phone": "string",
+    "role_id": "string"
+  }
 }
 ```
 
-- **Resposta de Erro (Status 500):**
+#### Response (Erro):
+
+- Status: `500 Internal Server Error`
 
 ```json
 {
-  "error": "Error Updating Collaborator",
-  "msg": "Detalhes do erro"
-}
-```
-
-- **Resposta de Erro (Status 404 - Quando não encontrado):**
-
-```json
-{
-  "message": "Collaborator Not Found"
-}
-```
-
----
-
-### **5. Deletar um Colaborador**
-
-- **URL:** `/api/collaborators/:id`
-- **Método:** `DELETE`
-- **Descrição:** Deleta um colaborador pelo ID.
-- **Parâmetros de URL:**
-
-  - `id`: ID do colaborador (obrigatório).
-
-- **Resposta de Sucesso (Status 200):**
-
-```json
-{
-  "Message": "Collaborator Deleted Successfully"
-}
-```
-
-- **Resposta de Erro (Status 500):**
-
-```json
-{
-  "message": "Error to Delete Collaborator"
-}
-```
-
-- **Resposta de Erro (Status 404 - Quando não encontrado):**
-
-```json
-{
-  "Message": "Collaborator Not Found"
+  "name": "Error Name",
+  "message": "Error Message",
+  "statusCode": 500
 }
 ```
 
 ---
 
-## **Erros Comuns**
+### 5. **DELETE /:id**
 
-- **500 - Internal Server Error:** Ocorre em falhas no servidor ou ao processar a requisição.
-- **404 - Not Found:** O recurso não foi encontrado (ex: colaborador não encontrado).
+Exclui um colaborador existente.
+
+#### Request Parameters:
+
+- `id`: ID do colaborador.
+
+#### Response (Sucesso):
+
+- Status: `200 OK`
+
+```json
+{
+  "name": "DELETED_COLLABORATOR",
+  "message": "Colaborador excluído com sucesso.",
+  "statusCode": 200,
+  "data": {
+    "_id": "string",
+    "name": "string",
+    "position": "string",
+    "admission": "string",
+    "phone": "string",
+    "role_id": "string"
+  }
+}
+```
+
+#### Response (Erro):
+
+- Status: `500 Internal Server Error`
+
+```json
+{
+  "name": "Error Name",
+  "message": "Error Message",
+  "statusCode": 500
+}
+```

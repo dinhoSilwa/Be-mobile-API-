@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { AuthController } from "../../Controller/authControllers/auth";
+import { AuthController } from "../../controllers/authControllers/auth"
 
 export const routerAuth = Router()
 routerAuth.post('/create-credentials', AuthController.createAuth)
