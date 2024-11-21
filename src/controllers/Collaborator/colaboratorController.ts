@@ -1,6 +1,14 @@
 import { CollaboratorServices } from "../../services/Collaborator/collaboratorServices";
 import { Request, Response } from "express";
 import { ErrorResponse } from "../errors/UnexpectedError";
+import type { CollaboratorProps } from "../../types/collaborators/collaboratorsTypes";
+
+interface SucessCollaboratorResponse {
+  name: string;
+  message: string;
+  statusCode: number;
+  data?: CollaboratorProps | CollaboratorProps[] | any;
+}
 
 export class CollaboratorController {
   static async create(
@@ -11,7 +19,7 @@ export class CollaboratorController {
       const collaborator = await CollaboratorServices.createCollaborator(
         request.body
       );
-      const successResponse = {
+      const successResponse: SucessCollaboratorResponse = {
         name: "COLLABORATOR_CREATED",
         message: "Colaborador criado com Sucesso.",
         statusCode: 201,
@@ -44,7 +52,7 @@ export class CollaboratorController {
 
       const allCollaboratorsByRoleId =
         await CollaboratorServices.getAllColaborator(role_id);
-      const successResponse = {
+      const successResponse: SucessCollaboratorResponse = {
         name: "COLLABORATOR_OBTAINED",
         message: "Colaboradores obtidos com sucesso.",
         statusCode: 200,
@@ -78,7 +86,7 @@ export class CollaboratorController {
         role_id
       );
 
-      const successResponse = {
+      const successResponse: SucessCollaboratorResponse = {
         name: "COLLABORATOR_OBTAINED",
         message: "Colaborador obtido com sucesso por ID.",
         statusCode: 200,
@@ -107,7 +115,7 @@ export class CollaboratorController {
         request.params.id,
         request.body
       );
-      const successResponse = {
+      const successResponse: SucessCollaboratorResponse = {
         name: "UPDATED_COLLABORATOR",
         message: "Colaborador atualizado com sucesso.",
         statusCode: 200,
@@ -140,7 +148,7 @@ export class CollaboratorController {
         request.params.id
       );
 
-      const successResponse = {
+      const successResponse: SucessCollaboratorResponse = {
         name: "DELETED_COLLABORATOR",
         message: "Colaborador excluído com sucesso.",
         statusCode: 201,
