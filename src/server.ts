@@ -1,8 +1,10 @@
 import app from "./app";
 import { configDotenv } from "dotenv";
 import { MongoDBConnection } from "./utils/mongoDB/db";
-import { PORT, uriDB } from "./utils/mongoDB/client";
+import { uriDB } from "./utils/mongoDB/client";
 configDotenv();
+
+const PORT = process.env.PORT || 5000;
 
 const StartServer = async () => {
   try {
