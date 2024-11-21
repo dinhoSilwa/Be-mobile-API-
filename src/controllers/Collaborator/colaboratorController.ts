@@ -1,80 +1,166 @@
 import { CollaboratorServices } from "../../services/Collaborator/collaboratorServices";
 import { Request, Response } from "express";
+import { ErrorResponse } from "../errors/UnexpectedError";
 
 export class CollaboratorController {
-  static async create(req: Request, res: Response): Promise<void> {
+  static async create(
+    request: Request,
+    response: Response
+  ): Promise<Response | void> {
     try {
       const collaborator = await CollaboratorServices.createCollaborator(
-        req.body
+        request.body
       );
+      const successResponse = {
+        name: "COLLABORATOR_CREATED",
+        message: "Colaborador criado com Sucesso.",
+        statusCode: 201,
+        data: collaborator,
+      };
 
-      res.status(201).json({ collaborator });
+      response.status(201).json(successResponse);
     } catch (error) {
-      res
-        .status(500)
-        .json({ error: "Error creating Collaborator", msg: error });
+      if (error instanceof Error) {
+        const errorResponse = new ErrorResponse(
+          error instanceof Error ? error.name : "UNKNOW_ERROR",
+          error instanceof Error
+            ? error.message
+            : "Ocorreu um erro inesperado.",
+          401
+        );
+        return response
+          .status(errorResponse.statusCode)
+          .json(errorResponse.setError());
+      }
     }
   }
 
-  static async getAll(req: Request, res: Response): Promise<void> {
+  static async getAll(
+    request: Request,
+    response: Response
+  ): Promise<Response | void> {
     try {
-      const { role_id } = req.params;
-      if (!role_id) {
-       res.status(500).json({ msg: "Falha ao Obter Id" });
-      }
+      const { role_id } = request.params;
 
       const allCollaboratorsByRoleId =
-        await CollaboratorServices.getAllColaboratorList(role_id);
-      res.status(200).json(allCollaboratorsByRoleId);
+        await CollaboratorServices.getAllColaborator(role_id);
+      const successResponse = {
+        name: "COLLABORATOR_OBTAINED",
+        message: "Colaboradores obtidos com sucesso.",
+        statusCode: 200,
+        data: allCollaboratorsByRoleId,
+      };
+      response.status(200).json(successResponse);
     } catch (error) {
-      res
-        .status(500)
-        .json({ error: "Error To get All Collaborator", msg: error });
-    }
-  }
-
-  static async get(req: Request, res: Response): Promise<void> {
-    try {
-      const collaborator = await CollaboratorServices.getColaborator(
-        req.params.id
-      );
-      res.status(200).json({ collaborator });
-    } catch (error) {
-      res
-        .status(500)
-        .json({ error: "Error Fetching Collaborator", msg: error });
-    }
-  }
-
-  static async update(req: Request, res: Response): Promise<void> {
-    try {
-      const updateCollaborator = await CollaboratorServices.UpdateCollaborator(
-        req.params.id,
-        req.body
-      );
-      if (!updateCollaborator) {
-        res.status(404).json({ message: "Collaborator Not Found" });
-        return;
+      if (error instanceof Error) {
+        const responseError = new ErrorResponse(
+          error instanceof Error ? error.name : "UNKNOW_ERROR",
+          error instanceof Error
+            ? error.message
+            : "Ocorreu um erro inesperado.",
+          404
+        );
+        return response
+          .status(responseError.statusCode)
+          .json(responseError.setError());
       }
-      res.status(200).json(updateCollaborator);
-    } catch (error) {
-      res
-        .status(500)
-        .json({ error: "Error Updating Collaborator", msg: error });
     }
   }
 
-  static async delete(req: Request, res: Response): Promise<void> {
+  static async getById(
+    request: Request,
+    response: Response
+  ): Promise<Response | void> {
+    try {
+      const { id, role_id } = request.params;
+      const collaborator = await CollaboratorServices.getColaboratorById(
+        id,
+        role_id
+      );
+
+      const successResponse = {
+        name: "COLLABORATOR_OBTAINED",
+        message: "Colaborador obtido com sucesso por ID.",
+        statusCode: 200,
+        data: collaborator,
+      };
+
+      response.status(200).json(successResponse);
+    } catch (error) {
+      const errorResponse = new ErrorResponse(
+        error instanceof Error ? error.name : "UNKNOW_ERROR",
+        error instanceof Error ? error.message : "Ocorreu um erro inesperado.",
+        500
+      );
+      return response
+        .status(errorResponse.statusCode)
+        .json(errorResponse.setError());
+    }
+  }
+
+  static async update(
+    request: Request,
+    response: Response
+  ): Promise<Response | void> {
+    try {
+      const updateCollaborator = await CollaboratorServices.updateCollaborator(
+        request.params.id,
+        request.body
+      );
+      const successResponse = {
+        name: "UPDATED_COLLABORATOR",
+        message: "Colaborador atualizado com sucesso.",
+        statusCode: 200,
+        data: updateCollaborator,
+      };
+
+      response.status(200).json(successResponse);
+    } catch (error) {
+      if (error instanceof Error) {
+        const responseError = new ErrorResponse(
+          error instanceof Error ? error.name : "UNKNOW_ERROR",
+          error instanceof Error
+            ? error.message
+            : "Ocorreu um erro inesperado.",
+          500
+        );
+        return response
+          .status(responseError.statusCode)
+          .json(responseError.setError());
+      }
+    }
+  }
+
+  static async delete(
+    request: Request,
+    response: Response
+  ): Promise<Response | void> {
     try {
       const deleteCollaborator = await CollaboratorServices.deleteCollaborator(
-        req.params.id
+        request.params.id
       );
-      if (!deleteCollaborator) {
-        res.status(404).json({ Message: "Collaborator Not Found" });
-      }
-      res.status(200).json({ Message: "Collaborator Deleted Sucessfully" });
+
+      const successResponse = {
+        name: "DELETED_COLLABORATOR",
+        message: "Colaborador excluído com sucesso.",
+        statusCode: 201,
+        data: deleteCollaborator,
+      };
+
+      response.status(200).json(successResponse);
     } catch (error) {
-      res.status(500).json({ message: "Error to Delete Collaborator" });
+      if (error instanceof Error) {
+        const responseError = new ErrorResponse(
+          error instanceof Error ? error.name : "UNKNOW_ERROR",
+          error instanceof Error
+            ? error.message
+            : "Ocorreu um erro inesperado.",
+          500
+        );
+        return response
+          .status(responseError.statusCode)
+          .json(responseError.setError());
+      }
     }
   }
 }
