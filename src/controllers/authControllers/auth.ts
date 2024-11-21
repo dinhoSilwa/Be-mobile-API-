@@ -2,9 +2,11 @@ import { ErrorResponse } from "../errors/UnexpectedError";
 import { AuthService } from "../../services/Auth/authService";
 import { Response, Request } from "express";
 
-interface CreateAuthProps {
+interface SucessAuthResponse {
   name: string;
-  email: string;
+  message: string;
+  statusCode: number;
+  token: string | null;
 }
 
 export class AuthController {
@@ -14,17 +16,20 @@ export class AuthController {
   ): Promise<Response | void> {
     try {
       await AuthService.create(req.body);
-      const sucessResponse = {
+      const sucessResponse: SucessAuthResponse = {
         name: "USER_CREATED",
         message: "usuário criado com sucesso",
         statusCode: 201,
+        token: null,
       };
       return res.status(201).json(sucessResponse);
     } catch (error) {
-      if (error instanceof Error) {
-        const errorResponse = new ErrorResponse(error.name, error.message, 500);
-        return res.status(500).json(errorResponse.setError());
-      }
+      const errorResponse = new ErrorResponse(
+        error instanceof Error ? error.name : "UNKNOW_ERROR",
+        error instanceof Error ? error.message : "Ocorreu um erro inesperado.",
+        500
+      );
+      return res.status(500).json(errorResponse.setError());
     }
   }
 
@@ -33,15 +38,23 @@ export class AuthController {
     res: Response
   ): Promise<Response | void> {
     try {
-      const { name, statusCode, message, token } =
-        await AuthService.credentials(req.body);
+      const { token } = await AuthService.credentials(req.body);
 
-      return res.status(statusCode).json({ name, message, statusCode, token });
+      const sucessResponse: SucessAuthResponse = {
+        name: "USER_AUTH",
+        message: "usuário Autenticado com sucesso",
+        statusCode: 200,
+        token: token,
+      };
+
+      return res.status(200).json(sucessResponse);
     } catch (error) {
-      if (error instanceof Error) {
-        const responseError = new ErrorResponse(error.name, error.message, 404);
-        return res.status(404).json(responseError.setError());
-      }
+      const responseError = new ErrorResponse(
+        error instanceof Error ? error.name : "UNKNOW_ERROR",
+        error instanceof Error ? error.message : "Ocorreu um erro inesperado.",
+        404
+      );
+      return res.status(404).json(responseError.setError());
     }
   }
 }
