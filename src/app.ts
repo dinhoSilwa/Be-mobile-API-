@@ -1,9 +1,9 @@
 import express, { Application } from "express";
 import cors from "cors";
-import { routeauth } from "./routes/auth/route";
-import { corsOptions } from "./middlewares/cors/cors";
 import { authenticateToken } from "./middlewares/authenticatedRouter/authenticated";
-import { routercollaborator } from "./routes/Collaborator/route";
+import { corsOptions } from "./middlewares/cors/cors";
+import { routeauth } from "./Routes/auth/route";
+import { routercollaborator } from "./Routes/Collaborator/route";
 
 const app: Application = express();
 app.use(cors(corsOptions));

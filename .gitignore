@@ -21,8 +21,7 @@ pids/
 # Cobertura de testes
 coverage/
 *.lcov
-.test.ts
-jest.config.js
+
 
 # Sistema operacional e arquivos de IDE
 .DS_Store
