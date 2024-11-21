@@ -31,7 +31,6 @@ Thumbs.db
 *.sublime-workspace
 
 # Build e diretórios temporários
-dist/
 build/
 tmp/
 temp/
