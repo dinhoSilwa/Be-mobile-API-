@@ -7,7 +7,7 @@ interface SucessCollaboratorResponse {
   name: string;
   message: string;
   statusCode: number;
-  data?: CollaboratorProps | CollaboratorProps[] | any;
+  data?: CollaboratorProps | CollaboratorProps[] | unknown;
 }
 
 export class CollaboratorController {

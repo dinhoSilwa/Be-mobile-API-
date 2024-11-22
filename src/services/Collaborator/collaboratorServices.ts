@@ -12,14 +12,14 @@ export class CollaboratorServices {
   static async getColaboratorById(
     id: string,
     role_id: string
-  ): Promise<CollaboratorProps | any> {
+  ): Promise<CollaboratorProps | Response> {
     const allCollaborator = await CollaboratorModel.find({ role_id });
     const collaboratorById = allCollaborator.filter((item) => item._id == id);
 
     if (!collaboratorById.length) {
       throw new Error("Colaborador não encontrado pelo ID fornecido.");
     }
-    return collaboratorById;
+    return collaboratorById as unknown as CollaboratorProps;
   }
 
   static async getAllColaborator(

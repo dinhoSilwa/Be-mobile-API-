@@ -41,7 +41,7 @@ export class AuthService {
 
   static async credentials(
     useCredentials: Pick<AuthUserProps, "email" | "password">
-  ): Promise<any> {
+  ): Promise<{ token: string }> {
     const { email, password } = useCredentials;
 
     const findEmail = await AuthModel.findOne({ email });
