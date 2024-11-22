@@ -24,7 +24,7 @@ export class MongoDBConnection {
       await mongoose.disconnect();
       console.log("Disconnected from Mongo Db Atlas");
     } catch (error) {
-      console.error("Error disconnecting from MongoDb Atlas");
+      console.error("Error disconnecting from MongoDb Atlas", error);
     }
   }
   public getConnection(): typeof mongoose {
