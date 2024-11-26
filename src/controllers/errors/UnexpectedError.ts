@@ -4,9 +4,9 @@ export class ErrorResponse extends Error {
     public message: string,
     public statusCode: number = 500,
   ) {
-    super(message);
-    this.name = name;
-    Object.setPrototypeOf(this, new.target.prototype);
+    super(message)
+    this.name = name
+    Object.setPrototypeOf(this, new.target.prototype)
   }
   setError() {
     return {
@@ -15,6 +15,6 @@ export class ErrorResponse extends Error {
         message: this.message,
         statusCode: this.statusCode,
       },
-    };
+    }
   }
 }
