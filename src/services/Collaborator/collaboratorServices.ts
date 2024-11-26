@@ -27,9 +27,7 @@ export class CollaboratorServices {
   ): Promise<CollaboratorProps[]> {
     const collaborators = await CollaboratorModel.find({ role_id });
     if (!collaborators.length) {
-      throw new Error(
-        "Nenhum colaborador encontrado para o role_id fornecido."
-      );
+      return collaborators;
     }
     return collaborators;
   }
