@@ -16,13 +16,13 @@ const AuthUser = new Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 const AuthModel = model<AuthUserProps>(
   "authUsers",
   AuthUser,
-  "authenticated-users"
+  "authenticated-users",
 );
 
 //Encryption é uma class Externa
@@ -40,7 +40,7 @@ export class AuthService {
   }
 
   static async credentials(
-    useCredentials: Pick<AuthUserProps, "email" | "password">
+    useCredentials: Pick<AuthUserProps, "email" | "password">,
   ): Promise<{ token: string }> {
     const { email, password } = useCredentials;
 

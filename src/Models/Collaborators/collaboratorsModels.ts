@@ -16,5 +16,5 @@ export const CollaboratorSchema = new Schema({
 
 export const CollaboratorModel = model<CollaboratorProps>(
   "Collaborator",
-  CollaboratorSchema
+  CollaboratorSchema,
 );

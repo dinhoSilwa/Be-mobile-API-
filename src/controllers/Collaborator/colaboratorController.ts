@@ -13,11 +13,11 @@ interface SucessCollaboratorResponse {
 export class CollaboratorController {
   static async create(
     request: Request,
-    response: Response
+    response: Response,
   ): Promise<Response | void> {
     try {
       const collaborator = await CollaboratorServices.createCollaborator(
-        request.body
+        request.body,
       );
       const successResponse: SucessCollaboratorResponse = {
         name: "COLLABORATOR_CREATED",
@@ -34,7 +34,7 @@ export class CollaboratorController {
           error instanceof Error
             ? error.message
             : "Ocorreu um erro inesperado.",
-          401
+          401,
         );
         return response
           .status(errorResponse.statusCode)
@@ -45,7 +45,7 @@ export class CollaboratorController {
 
   static async getAll(
     request: Request,
-    response: Response
+    response: Response,
   ): Promise<Response | void> {
     try {
       const { role_id } = request.params;
@@ -66,7 +66,7 @@ export class CollaboratorController {
           error instanceof Error
             ? error.message
             : "Ocorreu um erro inesperado.",
-          404
+          404,
         );
         return response
           .status(responseError.statusCode)
@@ -77,13 +77,13 @@ export class CollaboratorController {
 
   static async getById(
     request: Request,
-    response: Response
+    response: Response,
   ): Promise<Response | void> {
     try {
       const { id, role_id } = request.params;
       const collaborator = await CollaboratorServices.getColaboratorById(
         id,
-        role_id
+        role_id,
       );
 
       const successResponse: SucessCollaboratorResponse = {
@@ -98,7 +98,7 @@ export class CollaboratorController {
       const errorResponse = new ErrorResponse(
         error instanceof Error ? error.name : "UNKNOW_ERROR",
         error instanceof Error ? error.message : "Ocorreu um erro inesperado.",
-        500
+        500,
       );
       return response
         .status(errorResponse.statusCode)
@@ -108,12 +108,12 @@ export class CollaboratorController {
 
   static async update(
     request: Request,
-    response: Response
+    response: Response,
   ): Promise<Response | void> {
     try {
       const updateCollaborator = await CollaboratorServices.updateCollaborator(
         request.params.id,
-        request.body
+        request.body,
       );
       const successResponse: SucessCollaboratorResponse = {
         name: "UPDATED_COLLABORATOR",
@@ -130,7 +130,7 @@ export class CollaboratorController {
           error instanceof Error
             ? error.message
             : "Ocorreu um erro inesperado.",
-          500
+          500,
         );
         return response
           .status(responseError.statusCode)
@@ -141,11 +141,11 @@ export class CollaboratorController {
 
   static async delete(
     request: Request,
-    response: Response
+    response: Response,
   ): Promise<Response | void> {
     try {
       const deleteCollaborator = await CollaboratorServices.deleteCollaborator(
-        request.params.id
+        request.params.id,
       );
 
       const successResponse: SucessCollaboratorResponse = {
@@ -163,7 +163,7 @@ export class CollaboratorController {
           error instanceof Error
             ? error.message
             : "Ocorreu um erro inesperado.",
-          500
+          500,
         );
         return response
           .status(responseError.statusCode)

@@ -5,7 +5,7 @@ import type { userToken } from "../../types/types";
 export const authenticateToken = (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): void | Response => {
   try {
     const authHeader = req.headers.authorization;

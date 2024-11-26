@@ -14,11 +14,11 @@ export const AuthUser = new Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 export const AuthModel = model<AuthUserProps>(
   "authUsers",
   AuthUser,
-  "authenticated-users"
+  "authenticated-users",
 );

@@ -3,7 +3,7 @@ import type { CollaboratorProps } from "../../types/collaborators/collaboratorsT
 
 export class CollaboratorServices {
   static async createCollaborator(
-    Collaborator: CollaboratorProps
+    Collaborator: CollaboratorProps,
   ): Promise<CollaboratorProps> {
     const collaborator = new CollaboratorModel(Collaborator);
     return await collaborator.save();
@@ -11,7 +11,7 @@ export class CollaboratorServices {
 
   static async getColaboratorById(
     id: string,
-    role_id: string
+    role_id: string,
   ): Promise<CollaboratorProps | Response> {
     const allCollaborator = await CollaboratorModel.find({ role_id });
     const collaboratorById = allCollaborator.filter((item) => item._id == id);
@@ -23,7 +23,7 @@ export class CollaboratorServices {
   }
 
   static async getAllColaborator(
-    role_id: string
+    role_id: string,
   ): Promise<CollaboratorProps[]> {
     const collaborators = await CollaboratorModel.find({ role_id });
     if (!collaborators.length) {
@@ -34,14 +34,14 @@ export class CollaboratorServices {
 
   static async updateCollaborator(
     id: string,
-    data: Partial<CollaboratorProps>
+    data: Partial<CollaboratorProps>,
   ): Promise<CollaboratorProps | void> {
     const updateCollaborator = await CollaboratorModel.findByIdAndUpdate(
       id,
       data,
       {
         new: true,
-      }
+      },
     );
     if (!updateCollaborator) {
       throw new Error("Colaborador não encontrado para atualização.");
@@ -50,7 +50,7 @@ export class CollaboratorServices {
   }
 
   static async deleteCollaborator(
-    id: string
+    id: string,
   ): Promise<CollaboratorProps | Error> {
     const deleteCollaborator = await CollaboratorModel.findByIdAndDelete(id);
     if (!deleteCollaborator) {

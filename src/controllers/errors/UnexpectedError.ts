@@ -2,7 +2,7 @@ export class ErrorResponse extends Error {
   constructor(
     public name: string,
     public message: string,
-    public statusCode: number = 500
+    public statusCode: number = 500,
   ) {
     super(message);
     this.name = name;
