@@ -28,15 +28,12 @@ const AuthModel = model<AuthUserProps>(
 //Encryption é uma class Externa
 
 export class AuthService {
-  static async create(
-    useAuth: AuthUserProps,
-  ): Promise<AuthUserProps | string> {
+  static async create(useAuth: AuthUserProps): Promise<AuthUserProps | string> {
     const { name, email, password } = useAuth
     if (!useAuth) {
       throw new Error('Falha ao Obter Dados do usuários')
     }
-    const encryptPass =
-      await Encryption.encryptPassword(password)
+    const encryptPass = await Encryption.encryptPassword(password)
     const newUserAuth = {
       name,
       email,
@@ -47,24 +44,14 @@ export class AuthService {
   }
 
   static async credentials(
-    useCredentials: Pick<
-      AuthUserProps,
-      'email' | 'password'
-    >,
+    useCredentials: Pick<AuthUserProps, 'email' | 'password'>,
   ): Promise<{ token: string }> {
     const { email, password } = useCredentials
 
     const findEmail = await AuthModel.findOne({ email })
-    if (!findEmail)
-      throw new Error(
-        'O email fornecido não foi encontrado.',
-      )
-    const isMatch = await Encryption.compare(
-      password,
-      findEmail?.password,
-    )
-    if (!isMatch)
-      throw new Error('A senha fornecida está incorreta.')
+    if (!findEmail) throw new Error('O email fornecido não foi encontrado.')
+    const isMatch = await Encryption.compare(password, findEmail?.password)
+    if (!isMatch) throw new Error('A senha fornecida está incorreta.')
 
     const newAuth: {
       name: string
@@ -76,8 +63,7 @@ export class AuthService {
       _id: findEmail.id,
     }
 
-    const token =
-      TokenManager.getInstance().generateToken(newAuth)
+    const token = TokenManager.getInstance().generateToken(newAuth)
     return {
       token,
     }

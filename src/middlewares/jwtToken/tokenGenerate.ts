@@ -10,9 +10,7 @@ export class TokenManager {
   private constructor() {
     this.secretKey = process.env.JWT_SECRET_KEY || ''
     if (!this.secretKey) {
-      throw new Error(
-        'JWT_SECRET_KEY não definido no ambiente.',
-      )
+      throw new Error('JWT_SECRET_KEY não definido no ambiente.')
     }
   }
 
@@ -23,10 +21,7 @@ export class TokenManager {
     return TokenManager.instance
   }
 
-  public generateToken(
-    payload: object,
-    expiresIn: string = '1h',
-  ): string {
+  public generateToken(payload: object, expiresIn: string = '1h'): string {
     if (!this.secretKey) {
       throw new Error('Chave secreta não configurada.')
     }

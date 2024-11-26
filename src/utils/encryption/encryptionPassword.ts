@@ -7,14 +7,8 @@ export class Encryption {
     return hash
   }
 
-  static async compare(
-    password: string,
-    hashedPassword: string,
-  ) {
-    const isMatch = await bcrypt.compare(
-      password,
-      hashedPassword,
-    )
+  static async compare(password: string, hashedPassword: string) {
+    const isMatch = await bcrypt.compare(password, hashedPassword)
     return isMatch
   }
 }

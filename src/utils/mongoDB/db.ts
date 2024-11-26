@@ -16,10 +16,7 @@ export class MongoDBConnection {
       await mongoose.connect(uri)
       console.log('Connected to MongoDB Atlas')
     } catch (error) {
-      console.log(
-        'Error connecting to MongoDB Atlas',
-        error,
-      )
+      console.log('Error connecting to MongoDB Atlas', error)
     }
   }
   public async disconnect(): Promise<void> {
@@ -27,10 +24,7 @@ export class MongoDBConnection {
       await mongoose.disconnect()
       console.log('Disconnected from Mongo Db Atlas')
     } catch (error) {
-      console.error(
-        'Error disconnecting from MongoDb Atlas',
-        error,
-      )
+      console.error('Error disconnecting from MongoDb Atlas', error)
     }
   }
   public getConnection(): typeof mongoose {

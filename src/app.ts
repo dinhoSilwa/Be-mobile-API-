@@ -8,10 +8,6 @@ import { routercollaborator } from './routes/Collaborator/route'
 const app: Application = express()
 app.use(cors(corsOptions))
 app.use(express.json())
-app.use(
-  '/api/collaborators/',
-  authenticateToken,
-  routercollaborator,
-)
+app.use('/api/collaborators/', authenticateToken, routercollaborator)
 app.use('/api/auth', routeauth)
 export default app

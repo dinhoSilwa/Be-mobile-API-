@@ -16,10 +16,9 @@ export class CollaboratorController {
     response: Response,
   ): Promise<Response | void> {
     try {
-      const collaborator =
-        await CollaboratorServices.createCollaborator(
-          request.body,
-        )
+      const collaborator = await CollaboratorServices.createCollaborator(
+        request.body,
+      )
       const successResponse: SucessCollaboratorResponse = {
         name: 'COLLABORATOR_CREATED',
         message: 'Colaborador criado com Sucesso.',
@@ -31,9 +30,7 @@ export class CollaboratorController {
     } catch (error) {
       if (error instanceof Error) {
         const errorResponse = new ErrorResponse(
-          error instanceof Error
-            ? error.name
-            : 'UNKNOW_ERROR',
+          error instanceof Error ? error.name : 'UNKNOW_ERROR',
           error instanceof Error
             ? error.message
             : 'Ocorreu um erro inesperado.',
@@ -54,9 +51,7 @@ export class CollaboratorController {
       const { role_id } = request.params
 
       const allCollaboratorsByRoleId =
-        await CollaboratorServices.getAllColaborator(
-          role_id,
-        )
+        await CollaboratorServices.getAllColaborator(role_id)
       const successResponse: SucessCollaboratorResponse = {
         name: 'COLLABORATOR_OBTAINED',
         message: 'Colaboradores obtidos com sucesso.',
@@ -67,9 +62,7 @@ export class CollaboratorController {
     } catch (error) {
       if (error instanceof Error) {
         const responseError = new ErrorResponse(
-          error instanceof Error
-            ? error.name
-            : 'UNKNOW_ERROR',
+          error instanceof Error ? error.name : 'UNKNOW_ERROR',
           error instanceof Error
             ? error.message
             : 'Ocorreu um erro inesperado.',
@@ -88,11 +81,10 @@ export class CollaboratorController {
   ): Promise<Response | void> {
     try {
       const { id, role_id } = request.params
-      const collaborator =
-        await CollaboratorServices.getColaboratorById(
-          id,
-          role_id,
-        )
+      const collaborator = await CollaboratorServices.getColaboratorById(
+        id,
+        role_id,
+      )
 
       const successResponse: SucessCollaboratorResponse = {
         name: 'COLLABORATOR_OBTAINED',
@@ -104,12 +96,8 @@ export class CollaboratorController {
       response.status(200).json(successResponse)
     } catch (error) {
       const errorResponse = new ErrorResponse(
-        error instanceof Error
-          ? error.name
-          : 'UNKNOW_ERROR',
-        error instanceof Error
-          ? error.message
-          : 'Ocorreu um erro inesperado.',
+        error instanceof Error ? error.name : 'UNKNOW_ERROR',
+        error instanceof Error ? error.message : 'Ocorreu um erro inesperado.',
         500,
       )
       return response
@@ -123,11 +111,10 @@ export class CollaboratorController {
     response: Response,
   ): Promise<Response | void> {
     try {
-      const updateCollaborator =
-        await CollaboratorServices.updateCollaborator(
-          request.params.id,
-          request.body,
-        )
+      const updateCollaborator = await CollaboratorServices.updateCollaborator(
+        request.params.id,
+        request.body,
+      )
       const successResponse: SucessCollaboratorResponse = {
         name: 'UPDATED_COLLABORATOR',
         message: 'Colaborador atualizado com sucesso.',
@@ -139,9 +126,7 @@ export class CollaboratorController {
     } catch (error) {
       if (error instanceof Error) {
         const responseError = new ErrorResponse(
-          error instanceof Error
-            ? error.name
-            : 'UNKNOW_ERROR',
+          error instanceof Error ? error.name : 'UNKNOW_ERROR',
           error instanceof Error
             ? error.message
             : 'Ocorreu um erro inesperado.',
@@ -159,10 +144,9 @@ export class CollaboratorController {
     response: Response,
   ): Promise<Response | void> {
     try {
-      const deleteCollaborator =
-        await CollaboratorServices.deleteCollaborator(
-          request.params.id,
-        )
+      const deleteCollaborator = await CollaboratorServices.deleteCollaborator(
+        request.params.id,
+      )
 
       const successResponse: SucessCollaboratorResponse = {
         name: 'DELETED_COLLABORATOR',
@@ -175,9 +159,7 @@ export class CollaboratorController {
     } catch (error) {
       if (error instanceof Error) {
         const responseError = new ErrorResponse(
-          error instanceof Error
-            ? error.name
-            : 'UNKNOW_ERROR',
+          error instanceof Error ? error.name : 'UNKNOW_ERROR',
           error instanceof Error
             ? error.message
             : 'Ocorreu um erro inesperado.',

@@ -16,14 +16,10 @@ export class CollaboratorServices {
     const allCollaborator = await CollaboratorModel.find({
       role_id,
     })
-    const collaboratorById = allCollaborator.filter(
-      (item) => item._id == id,
-    )
+    const collaboratorById = allCollaborator.filter((item) => item._id == id)
 
     if (!collaboratorById.length) {
-      throw new Error(
-        'Colaborador não encontrado pelo ID fornecido.',
-      )
+      throw new Error('Colaborador não encontrado pelo ID fornecido.')
     }
     return collaboratorById as unknown as CollaboratorProps
   }
@@ -44,14 +40,15 @@ export class CollaboratorServices {
     id: string,
     data: Partial<CollaboratorProps>,
   ): Promise<CollaboratorProps | void> {
-    const updateCollaborator =
-      await CollaboratorModel.findByIdAndUpdate(id, data, {
+    const updateCollaborator = await CollaboratorModel.findByIdAndUpdate(
+      id,
+      data,
+      {
         new: true,
-      })
+      },
+    )
     if (!updateCollaborator) {
-      throw new Error(
-        'Colaborador não encontrado para atualização.',
-      )
+      throw new Error('Colaborador não encontrado para atualização.')
     }
     return updateCollaborator
   }
@@ -59,8 +56,7 @@ export class CollaboratorServices {
   static async deleteCollaborator(
     id: string,
   ): Promise<CollaboratorProps | Error> {
-    const deleteCollaborator =
-      await CollaboratorModel.findByIdAndDelete(id)
+    const deleteCollaborator = await CollaboratorModel.findByIdAndDelete(id)
     if (!deleteCollaborator) {
       throw new Error('Falha ao Deletar o Colaborador')
     }

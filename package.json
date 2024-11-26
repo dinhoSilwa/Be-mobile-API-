@@ -8,7 +8,8 @@
     "start": "node dist/server.js",
     "test": "jest",
     "test:watch": "jest --watch",
-    "lint": "eslint \"src/**/*.{ts,js}\""
+    "lint": "eslint \"src/**/*.{ts,js}\"",
+    "format": "prettier --write"
   },
   "keywords": [],
   "author": "",

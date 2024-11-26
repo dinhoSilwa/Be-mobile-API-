@@ -25,12 +25,8 @@ export class AuthController {
       return res.status(201).json(sucessResponse)
     } catch (error) {
       const errorResponse = new ErrorResponse(
-        error instanceof Error
-          ? error.name
-          : 'UNKNOW_ERROR',
-        error instanceof Error
-          ? error.message
-          : 'Ocorreu um erro inesperado.',
+        error instanceof Error ? error.name : 'UNKNOW_ERROR',
+        error instanceof Error ? error.message : 'Ocorreu um erro inesperado.',
         500,
       )
       return res.status(500).json(errorResponse.setError())
@@ -42,9 +38,7 @@ export class AuthController {
     res: Response,
   ): Promise<Response | void> {
     try {
-      const { token } = await AuthService.credentials(
-        req.body,
-      )
+      const { token } = await AuthService.credentials(req.body)
 
       const sucessResponse: SucessAuthResponse = {
         name: 'USER_AUTH',
@@ -56,12 +50,8 @@ export class AuthController {
       return res.status(200).json(sucessResponse)
     } catch (error) {
       const responseError = new ErrorResponse(
-        error instanceof Error
-          ? error.name
-          : 'UNKNOW_ERROR',
-        error instanceof Error
-          ? error.message
-          : 'Ocorreu um erro inesperado.',
+        error instanceof Error ? error.name : 'UNKNOW_ERROR',
+        error instanceof Error ? error.message : 'Ocorreu um erro inesperado.',
         404,
       )
       return res.status(404).json(responseError.setError())

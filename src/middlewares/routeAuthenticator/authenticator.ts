@@ -1,8 +1,4 @@
-import type {
-  NextFunction,
-  Request,
-  Response,
-} from 'express'
+import type { NextFunction, Request, Response } from 'express'
 import { TokenManager } from '../jwtToken/tokenGenerate'
 import type { userToken } from '../../types/types'
 
@@ -14,19 +10,13 @@ export const authenticateToken = (
   try {
     const authHeader = req.headers.authorization
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return res
-        .status(401)
-        .json({ error: 'Token Não Fornecido ou inválido' })
+      return res.status(401).json({ error: 'Token Não Fornecido ou inválido' })
     }
     const token = authHeader.split(' ')[1]
     const tokenManager = TokenManager.getInstance()
-    const decodedToken = tokenManager.verifyToken(
-      token,
-    ) as userToken
+    const decodedToken = tokenManager.verifyToken(token) as userToken
     if (!decodedToken) {
-      return res
-        .status(403)
-        .json({ error: 'Token inválido ou expirado' })
+      return res.status(403).json({ error: 'Token inválido ou expirado' })
     }
 
     req.user = decodedToken
