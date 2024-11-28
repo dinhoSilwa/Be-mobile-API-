@@ -40,6 +40,13 @@ export class CollaboratorServices {
     id: string,
     data: Partial<CollaboratorProps>,
   ): Promise<CollaboratorProps | void> {
+
+    const {role_id} = data
+    const findCollaborato = await CollaboratorModel.findOne({_id : id, role_id})
+    if(!findCollaborato){
+      throw new Error("Id não encontrado")
+    }
+    
     const updateCollaborator = await CollaboratorModel.findByIdAndUpdate(
       id,
       data,
