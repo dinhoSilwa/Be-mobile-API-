@@ -14,17 +14,22 @@ export class MongoDBConnection {
   public async connect(uri: string): Promise<void> {
     try {
       await mongoose.connect(uri)
-      console.log('Connected to MongoDB Atlas')
+      //console.log('Connected to MongoDB Atlas')
     } catch (error) {
-      console.log('Error connecting to MongoDB Atlas', error)
+      if (error instanceof Error)
+        throw new Error(`${(error.name, error.message)}`)
+
+      //console.log('Error connecting to MongoDB Atlas', error)
     }
   }
   public async disconnect(): Promise<void> {
     try {
       await mongoose.disconnect()
-      console.log('Disconnected from Mongo Db Atlas')
+      //console.log('Disconnected from Mongo Db Atlas')
     } catch (error) {
-      console.error('Error disconnecting from MongoDb Atlas', error)
+      if (error instanceof Error)
+        throw new Error(`${(error.name, error.message)}`)
+      //console.error('Error disconnecting from MongoDb Atlas', error)
     }
   }
   public getConnection(): typeof mongoose {

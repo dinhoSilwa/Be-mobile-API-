@@ -2,7 +2,7 @@ export class ErrorResponse extends Error {
   constructor(
     public name: string,
     public message: string,
-    public statusCode: number = 500,
+    // public statusCode: number = 500,
   ) {
     super(message)
     this.name = name
@@ -13,7 +13,7 @@ export class ErrorResponse extends Error {
       error: {
         name: this.name,
         message: this.message,
-        statusCode: this.statusCode,
+        // statusCode: this.statusCode,
       },
     }
   }
