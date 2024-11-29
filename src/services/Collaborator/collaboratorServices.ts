@@ -37,12 +37,12 @@ export class CollaboratorServices {
   }
 
   static async updateCollaborator(
-    id: string,
+    _id: string,
     data: Partial<CollaboratorProps>,
   ): Promise<CollaboratorProps | void> {
     const { role_id } = data
     const findCollaborato = await CollaboratorModel.findOne({
-      _id: id,
+      _id: _id,
       role_id,
     })
     if (!findCollaborato) {
@@ -50,7 +50,7 @@ export class CollaboratorServices {
     }
 
     const updateCollaborator = await CollaboratorModel.findByIdAndUpdate(
-      id,
+      _id,
       data,
       {
         new: true,
