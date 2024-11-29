@@ -112,7 +112,7 @@ export class CollaboratorController {
   ): Promise<Response | void> {
     try {
       const updateCollaborator = await CollaboratorServices.updateCollaborator(
-        request.params.id,
+        request.params._id,
         request.body,
       )
       const successResponse: SucessCollaboratorResponse = {

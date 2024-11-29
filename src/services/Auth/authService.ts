@@ -1,31 +1,6 @@
 import { TokenManager } from '../../middlewares/jwtToken/tokenGenerate'
+import { AuthModel, type AuthUserProps } from '../../models/Auth/authModel'
 import { Encryption } from '../../utils/encryption/encryptionPassword'
-import { model, Schema, type Document } from 'mongoose'
-
-interface AuthUserProps extends Document {
-  name: string
-  email: string
-  password: string
-}
-
-const AuthUser = new Schema(
-  {
-    name: { type: String, required: true },
-    email: { type: String, required: true },
-    password: { type: String, required: true },
-  },
-  {
-    timestamps: true,
-  },
-)
-
-const AuthModel = model<AuthUserProps>(
-  'authUsers',
-  AuthUser,
-  'authenticated-users',
-)
-
-//Encryption é uma class Externa
 
 export class AuthService {
   static async create(useAuth: AuthUserProps): Promise<AuthUserProps | string> {
@@ -33,6 +8,11 @@ export class AuthService {
     if (!useAuth) {
       throw new Error('Falha ao Obter Dados do usuários')
     }
+
+    const verifyEmail = await AuthModel.findOne({ email })
+
+    if (verifyEmail) throw new Error('O email já Existe, tente outro.')
+
     const encryptPass = await Encryption.encryptPassword(password)
     const newUserAuth = {
       name,
