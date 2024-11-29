@@ -1,7 +1,8 @@
 {
-  "watch": [
-    "src"
-  ],
+  "watch": ["src"],
   "ext": "ts",
-  "exec": "ts-node src/server.ts"
+  "exec": "yarn lint && yarn format && tsx src/server.ts",
+  "restartable": "rs",
+  "verbose": true,
+  "ignore": ["src/**/*.ts", "*.eslint*", "*.prettierrc*", "node_modules/**"]
 }
