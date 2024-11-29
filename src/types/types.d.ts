@@ -1,14 +1,14 @@
-import type { JwtPayload } from 'jsonwebtoken'
+import type { JwtPayload } from 'jsonwebtoken';
 
 interface userToken extends JwtPayload {
-  name: string
-  email: string
+  name: string;
+  email: string;
 }
 
 declare global {
   namespace Express {
     interface Request {
-      user?: userToken
+      user?: userToken;
     }
   }
 }
