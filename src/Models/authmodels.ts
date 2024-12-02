@@ -1,10 +1,5 @@
 import { model, Schema } from 'mongoose'
-
-export interface AuthUserProps extends Document {
-  name: string
-  email: string
-  password: string
-}
+import type { AuthUserProps } from '../types/auth/authTypes'
 
 const AuthUser = new Schema(
   {
