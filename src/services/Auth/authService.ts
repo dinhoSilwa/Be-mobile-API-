@@ -1,5 +1,5 @@
 import { TokenManager } from '../../middlewares/jwtToken/tokenGenerate'
-import { AuthModel, type AuthUserProps } from '../../models/auth/authmodels'
+import { AuthModel, type AuthUserProps } from '../../Models/authmodels'
 import { Encryption } from '../../utils/encryption/encryptionPassword'
 
 export class AuthService {

@@ -1,4 +1,4 @@
-import { CollaboratorModel } from '../../models/collaborators/collaboratorsModels'
+import { CollaboratorModel } from '../../Models/collaboratorsModels'
 import type { CollaboratorProps } from '../../types/collaborators/collaboratorsTypes'
 
 export class CollaboratorServices {
