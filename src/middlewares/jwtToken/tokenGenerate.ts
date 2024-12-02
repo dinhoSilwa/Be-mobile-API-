@@ -35,7 +35,9 @@ export class TokenManager {
       }
       return jwt.decode(token) as JwtPayload
     } catch (error) {
-      console.error('Erro ao decodificar token:', error)
+      if (error instanceof Error) {
+        throw new Error(`${(error.name, error.message, error.cause)}`)
+      }
       return null
     }
   }
@@ -49,7 +51,7 @@ export class TokenManager {
       return jwt.verify(token, this.secretKey) as JwtPayload
     } catch (error) {
       if (error instanceof jwt.TokenExpiredError) {
-        throw new Error('Falha na altenticação')
+        throw new Error(`Falha na altenticação ${(error.name, error.cause)}`)
       }
 
       return null

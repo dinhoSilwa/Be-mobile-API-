@@ -34,11 +34,8 @@ export class CollaboratorController {
           error instanceof Error
             ? error.message
             : 'Ocorreu um erro inesperado.',
-          401,
         )
-        return response
-          .status(errorResponse.statusCode)
-          .json(errorResponse.setError())
+        return response.status(500).json(errorResponse.setError())
       }
     }
   }
@@ -66,11 +63,8 @@ export class CollaboratorController {
           error instanceof Error
             ? error.message
             : 'Ocorreu um erro inesperado.',
-          404,
         )
-        return response
-          .status(responseError.statusCode)
-          .json(responseError.setError())
+        return response.status(500).json(responseError.setError())
       }
     }
   }
@@ -98,11 +92,8 @@ export class CollaboratorController {
       const errorResponse = new ErrorResponse(
         error instanceof Error ? error.name : 'UNKNOW_ERROR',
         error instanceof Error ? error.message : 'Ocorreu um erro inesperado.',
-        500,
       )
-      return response
-        .status(errorResponse.statusCode)
-        .json(errorResponse.setError())
+      return response.status(500).json(errorResponse.setError())
     }
   }
 
@@ -130,11 +121,8 @@ export class CollaboratorController {
           error instanceof Error
             ? error.message
             : 'Ocorreu um erro inesperado.',
-          500,
         )
-        return response
-          .status(responseError.statusCode)
-          .json(responseError.setError())
+        return response.status(500).json(responseError.setError())
       }
     }
   }
@@ -163,11 +151,8 @@ export class CollaboratorController {
           error instanceof Error
             ? error.message
             : 'Ocorreu um erro inesperado.',
-          500,
         )
-        return response
-          .status(responseError.statusCode)
-          .json(responseError.setError())
+        return response.status(500).json(responseError.setError())
       }
     }
   }
