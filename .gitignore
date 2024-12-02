@@ -35,6 +35,7 @@ Thumbs.db
 build/
 tmp/
 temp/
+dist/
 
 # Arquivos de erros do sistema
 .vscode/*
