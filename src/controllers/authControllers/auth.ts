@@ -27,7 +27,6 @@ export class AuthController {
       const errorResponse = new ErrorResponse(
         error instanceof Error ? error.name : 'UNKNOW_ERROR',
         error instanceof Error ? error.message : 'Ocorreu um erro inesperado.',
-        500,
       )
       return res.status(500).json(errorResponse.setError())
     }
@@ -52,7 +51,6 @@ export class AuthController {
       const responseError = new ErrorResponse(
         error instanceof Error ? error.name : 'UNKNOW_ERROR',
         error instanceof Error ? error.message : 'Ocorreu um erro inesperado.',
-        404,
       )
       return res.status(404).json(responseError.setError())
     }
