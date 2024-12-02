@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "tsx src/server.js",
     "build": "tsc",
-    "start": "tsx src/server.js",
+    "start": "node dist/serve.js",
     "start:dev": "nodemon",
     "test": "jest",
     "test:watch": "jest --watch",
