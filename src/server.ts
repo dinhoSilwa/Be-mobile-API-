@@ -1,7 +1,7 @@
-import app from './app'
 import { configDotenv } from 'dotenv'
-import { MongoDBConnection } from './utils/mongoDB/db'
-import { uriDB } from './utils/mongoDB/client'
+import { MongoDBConnection } from './utils/mongoDB/db.js'
+import { uriDB } from './utils/mongoDB/client.js'
+import { app } from './app.js'
 configDotenv()
 
 export const PORT = process.env.PORT || 5000

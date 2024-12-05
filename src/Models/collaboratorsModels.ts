@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose'
-import type { CollaboratorProps } from '../types/collaborators/collaboratorsTypes'
+import type { CollaboratorProps } from '../types/collaborators/collaboratorsTypes.js'
 
 export const CollaboratorSchema = new Schema({
   _id: { type: String, required: true },

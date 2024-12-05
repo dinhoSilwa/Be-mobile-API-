@@ -1,5 +1,5 @@
-import { CollaboratorModel } from "../../models/collaboratorsModels"
-import type { CollaboratorProps } from "../../types/collaborators/collaboratorsTypes"
+import { CollaboratorModel } from "../../models/collaboratorsModels.js"
+import type { CollaboratorProps } from "../../types/collaborators/collaboratorsTypes.js"
 
 export class CollaboratorServices {
   static async createCollaborator(

@@ -1,7 +1,7 @@
-import { TokenManager } from '../../middlewares/jwtToken/tokenGenerate'
-import { AuthModel } from '../../models/authmodels'
-import type { AuthUserProps } from '../../types/auth/authTypes'
-import { Encryption } from '../../utils/encryption/encryptionPassword'
+import { TokenManager } from '../../middlewares/jwtToken/tokenGenerate.js'
+import { AuthModel } from '../../models/authmodels.js'
+import type { AuthUserProps } from '../../types/auth/authTypes.js'
+import { Encryption } from '../../utils/encryption/encryptionPassword.js'
 
 export class AuthService {
   static async create(useAuth: AuthUserProps): Promise<AuthUserProps | string> {

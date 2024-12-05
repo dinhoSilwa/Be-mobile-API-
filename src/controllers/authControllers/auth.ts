@@ -1,5 +1,5 @@
-import { ErrorResponse } from '../errors/UnexpectedError'
-import { AuthService } from '../../services/Auth/authService'
+import { ErrorResponse } from '../errors/UnexpectedError.js'
+import { AuthService } from '../../services/Auth/authService.js'
 import { Response, Request } from 'express'
 
 interface SucessAuthResponse {

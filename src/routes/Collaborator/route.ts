@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { CollaboratorController } from '../../controllers/Collaborator/colaboratorController'
+import { CollaboratorController } from '../../controllers/Collaborator/colaboratorController.js'
 
 export const routercollaborator = Router()
 routercollaborator.get('/list/:role_id', CollaboratorController.getAll)

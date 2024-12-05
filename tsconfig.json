@@ -1,18 +1,23 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "strict": true,
-    "moduleResolution": "node",
-    "forceConsistentCasingInFileNames": false,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "resolveJsonModule": true
+    "baseUrl": "./src", // Define `src` como base
+    "target": "ES2022", // Alvo para recursos modernos do JavaScript
+    "module": "ES2022", // Usa o sistema de módulos ES
+    "moduleResolution": "node", // Resolve módulos no estilo Node.js
+    "strict": true, // Habilita verificações de tipo estritas
+    "esModuleInterop": true, // Compatibilidade com módulos CommonJS
+    "forceConsistentCasingInFileNames": true, // Impede diferenças de maiúsculas/minúsculas
+    "skipLibCheck": true, // Pula verificação de tipos em arquivos de declaração
+    "outDir": "./dist", // Saída dos arquivos transpilados
+    "rootDir": "./src", // Diretório raiz do código-fonte
+    "resolveJsonModule": true, // Permite importar arquivos JSON
+    "typeRoots": [
+      "./node_modules/@types"
+    ], // Tipos do TypeScript
+    "allowSyntheticDefaultImports": true // Suporte a imports sem `export default`
   },
   "include": [
-    "src/**/*"
+    "src"
   ],
   "exclude": [
     "node_modules"
