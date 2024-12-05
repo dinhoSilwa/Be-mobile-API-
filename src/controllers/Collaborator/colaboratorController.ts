@@ -1,7 +1,7 @@
-import { CollaboratorServices } from '../../services/Collaborator/collaboratorServices'
+import { CollaboratorServices } from '../../services/Collaborator/collaboratorServices.js'
 import { Request, Response } from 'express'
-import { ErrorResponse } from '../errors/UnexpectedError'
-import type { CollaboratorProps } from '../../types/collaborators/collaboratorsTypes'
+import { ErrorResponse } from '../errors/UnexpectedError.js'
+import type { CollaboratorProps } from '../../types/collaborators/collaboratorsTypes.js'
 
 interface SucessCollaboratorResponse {
   code: string

@@ -5,13 +5,14 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "tsx src/server.js",
+    "dev": "tsx src/server.ts",
     "build": "tsc",
-    "start": "node dist/serve.js",
+    "start": "node dist/server.js",
+    "start:prod": "yarn build && yarn start",
     "start:dev": "nodemon",
     "test": "jest",
     "test:watch": "jest --watch",
-    "lint": "eslint --fix",
+    "lint": "eslint --fix src/**/*.ts",
     "format": "prettier --check src/**/*.ts"
   },
   "keywords": [],

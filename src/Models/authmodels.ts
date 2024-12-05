@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose'
-import type { AuthUserProps } from '../types/auth/authTypes'
+import type { AuthUserProps } from '../types/auth/authTypes.js'
 
 const AuthUser = new Schema(
   {

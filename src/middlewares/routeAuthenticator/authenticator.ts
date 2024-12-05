@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from 'express'
-import { TokenManager } from '../jwtToken/tokenGenerate'
-import type { userToken } from '../../types/types'
+import { TokenManager } from '../jwtToken/tokenGenerate.js'
+import type { userToken } from '../../types/types.js'
 
 export const authenticateToken = (
   req: Request,
